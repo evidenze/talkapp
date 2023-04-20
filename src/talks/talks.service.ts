@@ -1,4 +1,5 @@
 import {
+  ConflictException,
   Injectable,
   InternalServerErrorException,
   NotFoundException,
@@ -92,6 +93,13 @@ export class TalksService {
       throw new NotFoundException('User not found');
     }
 
+    const checkAttendee: TalkAttendees =
+      await this.talkAttendeesRepo.getSingleAttendee(talkId, userId);
+
+    if (checkAttendee) {
+      throw new ConflictException('Attendee already exist');
+    }
+
     const talkAttendee: TalkAttendees =
       await this.talkAttendeesRepo.saveNewAttendee(talkId, userId);
 
@@ -148,7 +156,7 @@ export class TalksService {
 
     const deleteTalk: DeleteResult = await this.talksRepo.deleteATalk(talkId);
 
-    if (deleteTalk.affected) {
+    if (deleteTalk.affected === 1) {
       return {
         status: true,
         message: 'Talk deleted successfully',

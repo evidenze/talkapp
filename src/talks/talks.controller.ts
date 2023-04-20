@@ -1,4 +1,12 @@
-import { Body, Controller, Get, Param, Post, UseGuards } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Post,
+  UseGuards,
+} from '@nestjs/common';
 import { TalksService } from './talks.service';
 import { TalksDto } from './dto/talks.dto';
 import { User } from '../user/user.decorator';
@@ -46,8 +54,8 @@ export class TalksController {
   }
 
   @UseGuards(JwtAuthGuard)
-  @Get(':talkId/delete')
-  async deleteTalk(talkId: string) {
+  @Delete(':talkId')
+  async deleteTalk(@Param('talkId') talkId: string) {
     return await this.talksService.deleteATalk(talkId);
   }
 }

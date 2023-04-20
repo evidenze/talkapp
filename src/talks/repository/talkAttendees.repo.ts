@@ -17,9 +17,9 @@ export class TalkAttendeesRepository extends Repository<TalkAttendees> {
    */
   async saveNewAttendee(
     talkId: string,
-    attendeeId: string,
+    userId: string,
   ): Promise<TalkAttendees> {
-    return await this.save({ talkId, attendeeId });
+    return await this.save({ talkId, userId });
   }
 
   /**
@@ -30,5 +30,19 @@ export class TalkAttendeesRepository extends Repository<TalkAttendees> {
    */
   async getAttendees(talkId: string): Promise<TalkAttendees[]> {
     return await this.find({ where: { talkId } });
+  }
+
+  /**
+   * Get a single attendee for a talk
+   *
+   * @param talkId
+   * @param userId
+   * @returns
+   */
+  async getSingleAttendee(
+    talkId: string,
+    userId: string,
+  ): Promise<TalkAttendees> {
+    return await this.findOne({ where: { talkId, userId } });
   }
 }
