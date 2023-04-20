@@ -18,6 +18,7 @@ A simple talk App APIs.
 
 ## Installation
 
+```bash
 # Get the project
 git clone https://github.com/evidenze/talkapp.git talkapp
 
@@ -36,6 +37,7 @@ cp .env.example .env
 # DATABASE_PASSWORD=root
 # DATABASE_PORT=8889
 # JWT_SECRET=jhfhgbcgdtrgfjhsYTAR567TIUBEQHGF
+```
 
 
 ```bash
