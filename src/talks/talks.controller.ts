@@ -20,8 +20,8 @@ export class TalksController {
    */
   @UseGuards(JwtAuthGuard)
   @Post()
-  async createNewTalk(@Body() talkDetails: TalksDto) {
-    return await this.talksService.createNewTalk(talkDetails);
+  async createNewTalk(@Body() talkDetails: TalksDto, @User() user: any) {
+    return await this.talksService.createNewTalk(talkDetails, user.id);
   }
 
   /**

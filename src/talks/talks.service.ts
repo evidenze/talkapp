@@ -40,8 +40,16 @@ export class TalksService {
    * @param talkDetails
    * @returns {object}
    */
-  async createNewTalk(talkDetails: TalksInterface): Promise<any> {
-    const talk: Talks = await this.talksRepo.saveNewTalk(talkDetails);
+  async createNewTalk(
+    talkDetails: TalksInterface,
+    userId: string,
+  ): Promise<any> {
+    const newTalk = {
+      ...talkDetails,
+      userId,
+    };
+
+    const talk: Talks = await this.talksRepo.saveNewTalk(newTalk);
 
     return {
       status: true,

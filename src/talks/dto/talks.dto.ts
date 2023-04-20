@@ -1,4 +1,4 @@
-import { IsNotEmpty } from 'class-validator';
+import { IsNotEmpty, IsOptional } from 'class-validator';
 
 export class TalksDto {
   @IsNotEmpty()
@@ -19,6 +19,6 @@ export class TalksDto {
   @IsNotEmpty()
   location: string;
 
-  @IsNotEmpty()
+  @IsOptional()
   userId: string;
 }

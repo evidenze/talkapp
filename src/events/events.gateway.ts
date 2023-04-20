@@ -31,7 +31,7 @@ export class EventsGateway
     payload: NewConversationInterface,
   ): Promise<void> {
     await this.chatService.startConversation(payload);
-    this.server.emit('newConversation', payload);
+    this.server.emit(`newConversation+${payload.receiverId}`, payload);
   }
 
   @SubscribeMessage('newMessage')
@@ -40,7 +40,7 @@ export class EventsGateway
     payload: MessagesInterface,
   ): Promise<void> {
     await this.chatService.sendMessage(payload);
-    this.server.emit('newMessage', payload);
+    this.server.emit(`newMessage+${payload.senderId}`, payload);
   }
 
   afterInit(server: Server) {
